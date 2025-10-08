@@ -105,7 +105,7 @@ public class filterRules {
             String line;
             while ((line = reader.readLine()) != null) {
                 // 统一处理规则：只添加非空且以||开头的行
-                if (!line.isEmpty() && line.startsWith("||")) {
+                if (!line.isEmpty() && !line.startsWith("!")) {
                     lines.add(line);
                 }
             }

@@ -1,0 +1,33 @@
+name: Daily Filter Execution
+
+on:
+  schedule:
+    - cron: '0 */8 * * *'  # 每8小时执行一次
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  run-filter:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        
+    - name: Compile and run
+      run: |
+        javac filterRules.java
+        java filterRules
+        
+    - name: Commit and push results
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add filtered_results.txt
+        git commit -m "Update filtered results" || echo "No changes to commit"
+        git push

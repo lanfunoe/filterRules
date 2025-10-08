@@ -104,7 +104,6 @@ public class filterRules {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName), BUFFER_SIZE)) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // 统一处理规则：只添加非空且以||开头的行
                 if (!line.isEmpty() && !line.startsWith("!")) {
                     lines.add(line);
                 }
@@ -134,7 +133,6 @@ public class filterRules {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream), BUFFER_SIZE)) {
             String line;
             while ((line = reader.readLine()) != null) {
-                // 只添加非空且以||开头的行
                 if (!line.isEmpty() && !line.startsWith("!")) {
                     lines.add(line);
                 }
